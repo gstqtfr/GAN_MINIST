@@ -1,0 +1,11 @@
+*.pyc
+.idea/
+*~
+*.swp
+deepspeed/git_version_info.py
+
+# Build + installation data
+build/
+dist/
+fused_lamb_*.so
+deepspeed.egg-info/

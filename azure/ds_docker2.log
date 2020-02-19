@@ -1,0 +1,278 @@
+/usr/bin/pdsh
+sequential docker pull
+Warning: Permanently added '40.124.15.203' (ECDSA) to the list of known hosts.
+latest: Pulling from deepspeed/deepspeed
+7ddbc47eeb70: Pulling fs layer
+c1bbdc448b72: Pulling fs layer
+8c3b70e39044: Pulling fs layer
+45d437916d57: Pulling fs layer
+d8f1569ddae6: Pulling fs layer
+de5a2c57c41d: Pulling fs layer
+ea6f04a00543: Pulling fs layer
+7b872974e97c: Pulling fs layer
+ba8a751eb7d9: Pulling fs layer
+9d673dd6ffbe: Pulling fs layer
+4c5d45567826: Pulling fs layer
+34456715c43d: Pulling fs layer
+d5ec3d56883a: Pulling fs layer
+3b45a49594e2: Pulling fs layer
+3eb9435e01cd: Pulling fs layer
+45d437916d57: Waiting
+ca262cc911a8: Pulling fs layer
+0b8eb3a4efe5: Pulling fs layer
+d8f1569ddae6: Waiting
+bb50a5bee5e0: Pulling fs layer
+6bf8142fb3b1: Pulling fs layer
+6c46b061bc84: Pulling fs layer
+de5a2c57c41d: Waiting
+ea6f04a00543: Waiting
+7b872974e97c: Waiting
+ba8a751eb7d9: Waiting
+e91de4bfb492: Pulling fs layer
+3db737b2a2a0: Pulling fs layer
+6b5e949883ac: Pulling fs layer
+7810218fd90b: Pulling fs layer
+6c45c7bbbca5: Pulling fs layer
+ae238da69787: Pulling fs layer
+9d673dd6ffbe: Waiting
+4c5d45567826: Waiting
+34456715c43d: Waiting
+d5ec3d56883a: Waiting
+e91de4bfb492: Waiting
+3b45a49594e2: Waiting
+3db737b2a2a0: Waiting
+3eb9435e01cd: Waiting
+6b5e949883ac: Waiting
+ca262cc911a8: Waiting
+7810218fd90b: Waiting
+0b8eb3a4efe5: Waiting
+6c45c7bbbca5: Waiting
+bb50a5bee5e0: Waiting
+ae238da69787: Waiting
+6c46b061bc84: Waiting
+8c3b70e39044: Verifying Checksum
+8c3b70e39044: Download complete
+c1bbdc448b72: Download complete
+45d437916d57: Download complete
+7ddbc47eeb70: Verifying Checksum
+7ddbc47eeb70: Download complete
+d8f1569ddae6: Verifying Checksum
+d8f1569ddae6: Download complete
+ea6f04a00543: Verifying Checksum
+ea6f04a00543: Download complete
+de5a2c57c41d: Verifying Checksum
+de5a2c57c41d: Download complete
+7ddbc47eeb70: Pull complete
+c1bbdc448b72: Pull complete
+8c3b70e39044: Pull complete
+45d437916d57: Pull complete
+9d673dd6ffbe: Verifying Checksum
+9d673dd6ffbe: Download complete
+d8f1569ddae6: Pull complete
+de5a2c57c41d: Pull complete
+4c5d45567826: Verifying Checksum
+4c5d45567826: Download complete
+ea6f04a00543: Pull complete
+34456715c43d: Verifying Checksum
+34456715c43d: Download complete
+7b872974e97c: Download complete
+ba8a751eb7d9: Verifying Checksum
+ba8a751eb7d9: Download complete
+3eb9435e01cd: Verifying Checksum
+3eb9435e01cd: Download complete
+ca262cc911a8: Download complete
+0b8eb3a4efe5: Download complete
+7b872974e97c: Pull complete
+bb50a5bee5e0: Verifying Checksum
+bb50a5bee5e0: Download complete
+6bf8142fb3b1: Verifying Checksum
+6bf8142fb3b1: Download complete
+6c46b061bc84: Verifying Checksum
+6c46b061bc84: Download complete
+e91de4bfb492: Verifying Checksum
+e91de4bfb492: Download complete
+3db737b2a2a0: Download complete
+6b5e949883ac: Verifying Checksum
+6b5e949883ac: Download complete
+7810218fd90b: Verifying Checksum
+7810218fd90b: Download complete
+6c45c7bbbca5: Verifying Checksum
+6c45c7bbbca5: Download complete
+ae238da69787: Verifying Checksum
+ae238da69787: Download complete
+d5ec3d56883a: Verifying Checksum
+d5ec3d56883a: Download complete
+ba8a751eb7d9: Pull complete
+9d673dd6ffbe: Pull complete
+4c5d45567826: Pull complete
+34456715c43d: Pull complete
+3b45a49594e2: Verifying Checksum
+3b45a49594e2: Download complete
+d5ec3d56883a: Pull complete
+3b45a49594e2: Pull complete
+3eb9435e01cd: Pull complete
+ca262cc911a8: Pull complete
+0b8eb3a4efe5: Pull complete
+bb50a5bee5e0: Pull complete
+6bf8142fb3b1: Pull complete
+6c46b061bc84: Pull complete
+e91de4bfb492: Pull complete
+3db737b2a2a0: Pull complete
+6b5e949883ac: Pull complete
+7810218fd90b: Pull complete
+6c45c7bbbca5: Pull complete
+ae238da69787: Pull complete
+Digest: sha256:092da39ba21874eb99e0b229957217de8a41d14c44843c191ec4022c39ef09fa
+Status: Downloaded newer image for deepspeed/deepspeed:latest
+docker.io/deepspeed/deepspeed:latest
+Already up to date.
+Submodule 'DeepSpeedExamples' (https://github.com/microsoft/DeepSpeedExamples) registered for path 'DeepSpeedExamples'
+Submodule 'third_party/apex' (https://github.com/NVIDIA/apex.git) registered for path 'third_party/apex'
+Cloning into '/home/deepspeed/workdir/DeepSpeed/DeepSpeedExamples'...
+Cloning into '/home/deepspeed/workdir/DeepSpeed/third_party/apex'...
+Submodule path 'DeepSpeedExamples': checked out '07d1ce0d26044602a7b8bb289e590a980f14aded'
+Submodule path 'third_party/apex': checked out '880ab925bce9f817a93988b021e12db5f67f7787'
+starting docker image named deepspeed
+7796d0ce8765ce952ee00a4bc38c88ee2ef01e85a253f001ce1f2d3976ea6362
+Warning: Permanently added '13.84.171.28' (ECDSA) to the list of known hosts.
+latest: Pulling from deepspeed/deepspeed
+7ddbc47eeb70: Pulling fs layer
+c1bbdc448b72: Pulling fs layer
+8c3b70e39044: Pulling fs layer
+45d437916d57: Pulling fs layer
+d8f1569ddae6: Pulling fs layer
+de5a2c57c41d: Pulling fs layer
+ea6f04a00543: Pulling fs layer
+7b872974e97c: Pulling fs layer
+ba8a751eb7d9: Pulling fs layer
+9d673dd6ffbe: Pulling fs layer
+4c5d45567826: Pulling fs layer
+34456715c43d: Pulling fs layer
+d5ec3d56883a: Pulling fs layer
+3b45a49594e2: Pulling fs layer
+3eb9435e01cd: Pulling fs layer
+ca262cc911a8: Pulling fs layer
+0b8eb3a4efe5: Pulling fs layer
+bb50a5bee5e0: Pulling fs layer
+6bf8142fb3b1: Pulling fs layer
+6c46b061bc84: Pulling fs layer
+e91de4bfb492: Pulling fs layer
+3db737b2a2a0: Pulling fs layer
+6b5e949883ac: Pulling fs layer
+45d437916d57: Waiting
+7810218fd90b: Pulling fs layer
+6c45c7bbbca5: Pulling fs layer
+ae238da69787: Pulling fs layer
+d8f1569ddae6: Waiting
+de5a2c57c41d: Waiting
+ea6f04a00543: Waiting
+7b872974e97c: Waiting
+ba8a751eb7d9: Waiting
+9d673dd6ffbe: Waiting
+4c5d45567826: Waiting
+34456715c43d: Waiting
+d5ec3d56883a: Waiting
+3b45a49594e2: Waiting
+3eb9435e01cd: Waiting
+ca262cc911a8: Waiting
+0b8eb3a4efe5: Waiting
+bb50a5bee5e0: Waiting
+6bf8142fb3b1: Waiting
+6c46b061bc84: Waiting
+e91de4bfb492: Waiting
+3db737b2a2a0: Waiting
+6b5e949883ac: Waiting
+7810218fd90b: Waiting
+6c45c7bbbca5: Waiting
+ae238da69787: Waiting
+c1bbdc448b72: Verifying Checksum
+c1bbdc448b72: Download complete
+8c3b70e39044: Verifying Checksum
+8c3b70e39044: Download complete
+7ddbc47eeb70: Verifying Checksum
+7ddbc47eeb70: Download complete
+45d437916d57: Verifying Checksum
+45d437916d57: Download complete
+d8f1569ddae6: Verifying Checksum
+d8f1569ddae6: Download complete
+ea6f04a00543: Verifying Checksum
+ea6f04a00543: Download complete
+de5a2c57c41d: Verifying Checksum
+de5a2c57c41d: Download complete
+7ddbc47eeb70: Pull complete
+9d673dd6ffbe: Verifying Checksum
+9d673dd6ffbe: Download complete
+c1bbdc448b72: Pull complete
+8c3b70e39044: Pull complete
+4c5d45567826: Verifying Checksum
+4c5d45567826: Download complete
+45d437916d57: Pull complete
+d8f1569ddae6: Pull complete
+34456715c43d: Verifying Checksum
+34456715c43d: Download complete
+de5a2c57c41d: Pull complete
+ea6f04a00543: Pull complete
+7b872974e97c: Verifying Checksum
+7b872974e97c: Download complete
+ba8a751eb7d9: Verifying Checksum
+ba8a751eb7d9: Download complete
+3eb9435e01cd: Download complete
+ca262cc911a8: Verifying Checksum
+ca262cc911a8: Download complete
+0b8eb3a4efe5: Verifying Checksum
+0b8eb3a4efe5: Download complete
+bb50a5bee5e0: Verifying Checksum
+bb50a5bee5e0: Download complete
+d5ec3d56883a: Verifying Checksum
+d5ec3d56883a: Download complete
+6bf8142fb3b1: Verifying Checksum
+6bf8142fb3b1: Download complete
+6c46b061bc84: Verifying Checksum
+6c46b061bc84: Download complete
+3db737b2a2a0: Verifying Checksum
+3db737b2a2a0: Download complete
+e91de4bfb492: Verifying Checksum
+e91de4bfb492: Download complete
+6b5e949883ac: Verifying Checksum
+6b5e949883ac: Download complete
+7810218fd90b: Verifying Checksum
+7810218fd90b: Download complete
+ae238da69787: Verifying Checksum
+ae238da69787: Download complete
+6c45c7bbbca5: Verifying Checksum
+6c45c7bbbca5: Download complete
+7b872974e97c: Pull complete
+3b45a49594e2: Verifying Checksum
+3b45a49594e2: Download complete
+ba8a751eb7d9: Pull complete
+9d673dd6ffbe: Pull complete
+4c5d45567826: Pull complete
+34456715c43d: Pull complete
+d5ec3d56883a: Pull complete
+3b45a49594e2: Pull complete
+3eb9435e01cd: Pull complete
+ca262cc911a8: Pull complete
+0b8eb3a4efe5: Pull complete
+bb50a5bee5e0: Pull complete
+6bf8142fb3b1: Pull complete
+6c46b061bc84: Pull complete
+e91de4bfb492: Pull complete
+3db737b2a2a0: Pull complete
+6b5e949883ac: Pull complete
+7810218fd90b: Pull complete
+6c45c7bbbca5: Pull complete
+ae238da69787: Pull complete
+Digest: sha256:092da39ba21874eb99e0b229957217de8a41d14c44843c191ec4022c39ef09fa
+Status: Downloaded newer image for deepspeed/deepspeed:latest
+docker.io/deepspeed/deepspeed:latest
+Already up to date.
+Submodule 'DeepSpeedExamples' (https://github.com/microsoft/DeepSpeedExamples) registered for path 'DeepSpeedExamples'
+Submodule 'third_party/apex' (https://github.com/NVIDIA/apex.git) registered for path 'third_party/apex'
+Cloning into '/home/deepspeed/workdir/DeepSpeed/DeepSpeedExamples'...
+Cloning into '/home/deepspeed/workdir/DeepSpeed/third_party/apex'...
+Submodule path 'DeepSpeedExamples': checked out '07d1ce0d26044602a7b8bb289e590a980f14aded'
+Submodule path 'third_party/apex': checked out '880ab925bce9f817a93988b021e12db5f67f7787'
+starting docker image named deepspeed
+cb49af234fc90afbbfa5af225fa98bb22a98febcaefe13d43a94be11827f0ad1
+./setup_docker.sh: line 51: unexpected EOF while looking for matching ``'
+./setup_docker.sh: line 58: syntax error: unexpected end of file

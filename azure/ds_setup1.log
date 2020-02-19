@@ -1,0 +1,14 @@
+Warning: Permanently added '40.124.15.203' (ECDSA) to the list of known hosts.
+number of slots per vm: 1
+copying ssh keys, ssh config, hostfile to worker-0
+Warning: Permanently added '40.124.15.203' (ECDSA) to the list of known hosts.
+Cloning into 'workdir/DeepSpeed'...
+Warning: Permanently added '40.124.15.203' (ECDSA) to the list of known hosts.
+Warning: Permanently added '40.124.15.203' (ECDSA) to the list of known hosts.
+Warning: Permanently added '40.124.15.203' (ECDSA) to the list of known hosts.
+copying ssh keys, ssh config, hostfile to worker-1
+Warning: Permanently added '13.84.171.28' (ECDSA) to the list of known hosts.
+Cloning into 'workdir/DeepSpeed'...
+Warning: Permanently added '13.84.171.28' (ECDSA) to the list of known hosts.
+Warning: Permanently added '13.84.171.28' (ECDSA) to the list of known hosts.
+Warning: Permanently added '13.84.171.28' (ECDSA) to the list of known hosts.

@@ -1,0 +1,38 @@
+/usr/bin/pdsh
+sequential docker pull
+about to run: ssh -i id_rsa_azure -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null deepspeed@40.124.15.203 
+docker pull deepspeed/deepspeed:latest;
+ln -s workdir/DeepSpeed/azure/attach.sh attach.sh;
+cd workdir/DeepSpeed;
+git pull;
+git submodule update --init --recursive;
+bash azure/start_container.sh
+
+Warning: Permanently added '40.124.15.203' (ECDSA) to the list of known hosts.
+latest: Pulling from deepspeed/deepspeed
+Digest: sha256:092da39ba21874eb99e0b229957217de8a41d14c44843c191ec4022c39ef09fa
+Status: Image is up to date for deepspeed/deepspeed:latest
+docker.io/deepspeed/deepspeed:latest
+ln: failed to create symbolic link 'attach.sh': File exists
+Already up to date.
+starting docker image named deepspeed
+docker: Error response from daemon: Conflict. The container name "/deepspeed" is already in use by container "7796d0ce8765ce952ee00a4bc38c88ee2ef01e85a253f001ce1f2d3976ea6362". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+about to run: ssh -i id_rsa_azure -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null deepspeed@13.84.171.28 
+docker pull deepspeed/deepspeed:latest;
+ln -s workdir/DeepSpeed/azure/attach.sh attach.sh;
+cd workdir/DeepSpeed;
+git pull;
+git submodule update --init --recursive;
+bash azure/start_container.sh
+
+Warning: Permanently added '13.84.171.28' (ECDSA) to the list of known hosts.
+latest: Pulling from deepspeed/deepspeed
+Digest: sha256:092da39ba21874eb99e0b229957217de8a41d14c44843c191ec4022c39ef09fa
+Status: Image is up to date for deepspeed/deepspeed:latest
+docker.io/deepspeed/deepspeed:latest
+ln: failed to create symbolic link 'attach.sh': File exists
+Already up to date.
+starting docker image named deepspeed
+docker: Error response from daemon: Conflict. The container name "/deepspeed" is already in use by container "cb49af234fc90afbbfa5af225fa98bb22a98febcaefe13d43a94be11827f0ad1". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.

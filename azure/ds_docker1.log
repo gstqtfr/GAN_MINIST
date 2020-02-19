@@ -1,0 +1,4 @@
+/usr/bin/pdsh
+parallel docker pull
+pdsh@badger-event-horizon: 13.84.171.28: rcmd: socket: Permission denied
+pdsh@badger-event-horizon: 40.124.15.203: rcmd: socket: Permission denied

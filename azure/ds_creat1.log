@@ -1,0 +1,56 @@
+/usr/bin/jq
+{
+  "num_vms": 2,
+  "location": "southcentralus",
+  "azure_sku": "Standard_NV6_Promo",
+  "ssh_private_key": "id_rsa_azure",
+  "docker_ssh_port": 2222
+}
+{
+  "id": "/subscriptions/7f57eb63-0d10-463f-a213-c9694ebd16d2/resourceGroups/deepspeed_rg_southcentralus",
+  "location": "southcentralus",
+  "managedBy": null,
+  "name": "deepspeed_rg_southcentralus",
+  "properties": {
+    "provisioningState": "Succeeded"
+  },
+  "tags": null,
+  "type": "Microsoft.Resources/resourceGroups"
+}
+{
+  "accepted": true,
+  "id": "/subscriptions/7f57eb63-0d10-463f-a213-c9694ebd16d2/providers/Microsoft.MarketplaceOrdering/offerTypes/Microsoft.MarketplaceOrdering/offertypes/publishers/nvidia/offers/ngc_azure_17_11/plans/ngc_gpu_cloud_19_11_3/agreements/current",
+  "licenseTextLink": "https://storelegalterms.blob.core.windows.net/legalterms/3E5ED_legalterms_NVIDIA%253a24NGC%253a5FAZURE%253a5F17%253a5F11%253a24NGC%253a5FGPU%253a5FCLOUD%253a5F19%253a5F11%253a5F3%253a24KJVKRIWKTRQ3CIEPNL6YTG4AVORBHHPZCDQDVWX7JPPDEF6UM7R4XO76VDRHXCNTQYATKLGYYW3KA7DSIKTYXBZ3HJ2FMWYCINEY4WQ.txt",
+  "name": "ngc_gpu_cloud_19_11_3",
+  "plan": "ngc_gpu_cloud_19_11_3",
+  "privacyPolicyLink": "https://www.nvidia.com/en-us/about-nvidia/privacy-policy/",
+  "product": "ngc_azure_17_11",
+  "publisher": "nvidia",
+  "retrieveDatetime": "2020-02-14T12:07:24.9705066Z",
+  "signature": "IKA7BJSQWGRLYSKKQGFX2FKF2F53DQQTWN7JCHPAPL5HESEXKXWJU2KLHTCWTZUF3B3QKOE37GZMDVQWSR7WT36GUMYHVMG4NAGKDTQ",
+  "type": "Microsoft.MarketplaceOrdering/offertypes"
+}
+creating deepspeed_0
+{
+  "fqdns": "",
+  "id": "/subscriptions/7f57eb63-0d10-463f-a213-c9694ebd16d2/resourceGroups/deepspeed_rg_southcentralus/providers/Microsoft.Compute/virtualMachines/deepspeed_0",
+  "location": "southcentralus",
+  "macAddress": "00-0D-3A-71-40-3E",
+  "powerState": "VM running",
+  "privateIpAddress": "10.0.0.4",
+  "publicIpAddress": "40.124.15.203",
+  "resourceGroup": "deepspeed_rg_southcentralus",
+  "zones": ""
+}
+creating deepspeed_1
+{
+  "fqdns": "",
+  "id": "/subscriptions/7f57eb63-0d10-463f-a213-c9694ebd16d2/resourceGroups/deepspeed_rg_southcentralus/providers/Microsoft.Compute/virtualMachines/deepspeed_1",
+  "location": "southcentralus",
+  "macAddress": "00-0D-3A-74-8C-E4",
+  "powerState": "VM running",
+  "privateIpAddress": "10.0.0.5",
+  "publicIpAddress": "13.84.171.28",
+  "resourceGroup": "deepspeed_rg_southcentralus",
+  "zones": ""
+}
