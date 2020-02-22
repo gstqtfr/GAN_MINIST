@@ -44,30 +44,6 @@ def mnist_data(DATA_FOLDER='./data'):
                           transform=compose,
                           download=True)
 
-
-class NoiseDataset(Dataset):
-
-    def __init__(self, n, m):
-        super(Dataset, self).__init__()
-        self.n = n
-        self.m = m
-
-    #def __getitem__(self, idx):
-    #    if torch.is_tensor(idx):
-    #        idx = idx.tolist()
-
-
-    def __len__(self):
-        return self.m
-
-    def __add__(self, other):
-        return ConcatDataset([self, other])
-
-    def __iter__(self):
-        fresh_batch = Variable(torch.randn(self.n, self.m))
-        for r in fresh_batch:
-            yield r
-
 class DiscriminatorNet(torch.nn.Module):
     """
     A three hidden-layer discriminative neural network
@@ -213,21 +189,28 @@ def train_generator(discriminator, loss, optimizer, fake_data):
     return error
 
 def _main_():
+
     import os, sys
-    sys.path.insert(0, os.getcwd())
+    sys.path.append(os.getcwd())
     from dcgan.dc_utils import Logger
+    from dcgan.random_dataset import RandomDataset
+
+    criterion = nn.BCELoss()
 
     batch_size = 4
+    num_epochs = 20
     # Load data
     data = mnist_data()
     # Create loader with data, so that we can iterate over it
-    data_loader = torch.utils.data.DataLoader(data, batch_size=batch_size, shuffle=True)
+    mnist_data_loader = torch.utils.data.DataLoader(data, batch_size=batch_size, shuffle=True)
     # Num batches
-    num_batches = len(data_loader)
+    num_batches = len(mnist_data_loader)
+
+    generator_random_dataset = RandomDataset(batch_size=batch_size,
+                                             sample_size=100)
 
     discriminator = DiscriminatorNet()
     discriminator_parameters = filter(lambda p: p.requires_grad, discriminator.parameters())
-
 
     generator = GeneratorNet()
     generator_parameters = filter(lambda p: p.requires_grad, generator.parameters())
@@ -240,82 +223,84 @@ def _main_():
 
     # okay. fuck it. let's just give it a crack, shall we?
 
-    model_engine, optimizer, trainloader, __ = \
+    discriminator_model_engine, discriminator_optimizer, discriminator_train_loader, __ = \
         deepspeed.initialize(args=args,
                              model=discriminator,
                              model_parameters=discriminator_parameters,
-                             training_data=data_loader)
+                             training_data=mnist_data_loader)
 
-    model_engine, optimizer, trainloader, __ = \
+    generator_model_engine, generator_optimizer, generator_trainloader, __ = \
         deepspeed.initialize(args=args,
                              model=generator,
                              model_parameters=generator_parameters,
                              # training data is a function that provides
                              # just random data - generator, perhaps?
-                             training_data=data_loader)
+                             training_data=generator_random_dataset)
 
+    # Create targets for the discriminator network D
+    # (can use label flipping or label smoothing)
+    real_labels = Variable(torch.ones(batch_size, 1))
+    fake_labels = Variable(torch.zeros(batch_size, 1))
 
+    for epoch in range(num_epochs):  # loop over the dataset multiple times
+        running_loss = 0.0
+        for i, data in enumerate(discriminator_train_loader):
 
-    # Optimizers
-    d_optimizer = optim.Adam(discriminator.parameters(), lr=0.0002)
-    g_optimizer = optim.Adam(generator.parameters(), lr=0.0002)
+            # TODO: 1) TRAIN DISCRIMINATOR
+            # TODO: Evaluate the discriminator on the real input images
+            # get the inputs; data is a list of [inputs, labels]
+            inputs, labels = data[0].to(discriminator_model_engine.local_rank), \
+                             data[1].to(discriminator_model_engine.local_rank)
+            # feeding the discriminator with real data
+            outputs = discriminator_model_engine(inputs)
+            real_score = outputs
+            # Compute the discriminator loss with respect to the real labels (1s)
+            d_loss_real = criterion(outputs, real_labels)
 
-    # Loss function
-    loss = nn.BCELoss()
+            # TODO: what about the data[0].to(discriminator_model_engine.local_rank) thing?
+            # TODO: do we have to do that?!
 
-    # Number of steps to apply to the discriminator
-    d_steps = 1  # In Goodfellow et. al 2014 this variable is assigned to 1
-    # Number of epochs
-    num_epochs = 20
+            # MAKE SOME NOIZE!!!
+            batch_number, z = enumerate(generator_random_dataset)
+            # Transform the noise through the generator network to get synthetic images
+            fake_images = generator_model_engine(z)
+            # Evaluate the discriminator on the fake images
+            outputs = discriminator_model_engine(fake_images)
+            fake_score = outputs
+            # Compute the discriminator loss with respect to the fake labels (0s)
+            d_loss_fake = criterion(outputs, fake_labels)
 
-    num_test_samples = 16
-    test_noise = noise(num_test_samples)
+            # Optimize the discriminator
+            d_loss = d_loss_real + d_loss_fake
 
-    logger = Logger(model_name='VGAN', data_name='MNIST')
+            discriminator_model_engine.backward(d_loss)
+            discriminator_model_engine.step()
 
-    for epoch in range(num_epochs):
-        for n_batch, (real_batch, _) in enumerate(data_loader):
+            # 2) TRAIN GENERATOR
+            # Draw random noise vectors as inputs to the generator network
+            # Transform the noise through the generator network to get synthetic images
+            batch_no, z = enumerate(generator_random_dataset)
+            # Transform the noise through the generator network to get synthetic images
+            fake_images = generator_model_engine(z)
+            # Evaluate the (new) discriminator on the fake images
+            outputs = discriminator_model_engine(fake_images)
+            # Compute the cross-entropy loss with "real" as target (1s). This is what the G wants to do
+            g_loss = criterion(outputs, real_labels)
+            # Backprop it ...
+            generator_model_engine.backward(g_loss)
+            generator_model_engine.step()
 
-            # 1. Train Discriminator
-            real_data = Variable(images_to_vectors(real_batch))
-            if torch.cuda.is_available(): real_data = real_data.cuda()
-            # Generate fake data
-            fake_data = generator(noise(real_data.size(0))).detach()
-            # Train D
-            d_error, d_pred_real, d_pred_fake = train_discriminator(
-                discriminator,
-                loss,
-                d_optimizer,
-                real_data,
-                fake_data
-            )
+            if (batch_number + 1) % 300 == 0:
+                print('Epoch [%d/%d],  d_loss: %.4f, '
+                      'g_loss: %.4f, Mean D(x): %.2f, Mean D(G(z)): %.2f'
+                      % (epoch,
+                         num_epochs,
+                         d_loss.data[0],
+                         g_loss.data[0],
+                         real_score.data.mean(),
+                         fake_score.data.mean())
+                      )
 
-            # 2. Train Generator
-            # Generate fake data
-            fake_data = generator(noise(real_batch.size(0)))
-            # Train G
-            g_error = train_generator(
-                discriminator,
-                loss,
-                g_optimizer,
-                fake_data
-            )
-            # Log error
-            logger.log(d_error, g_error, epoch, n_batch, num_batches)
-
-            # Display Progress
-            if (n_batch) % 100 == 0:
-                # display.clear_output(True)
-                # Display Images
-                test_images = vectors_to_images(generator(test_noise)).data.cpu()
-                logger.log_images(test_images, num_test_samples, epoch, n_batch, num_batches);
-                # Display status Logs
-                logger.display_status(
-                    epoch, num_epochs, n_batch, num_batches,
-                    d_error, g_error, d_pred_real, d_pred_fake
-                )
-            # Model Checkpoints
-            logger.save_models(generator, discriminator, epoch)
 
 if __name__ == "__main__":
     _main_()
